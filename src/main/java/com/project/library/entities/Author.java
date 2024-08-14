@@ -20,14 +20,22 @@ public class Author implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "author")
-    private List<Book> bookList = new ArrayList<>();
+    private List<Book> bookListAuthor;
 
     public Author(){}
 
     public Author(Long id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.bookList = bookList;
+        this.bookListAuthor = new ArrayList<>();
+    }
+
+    public void addBookToAuthor(List<Book> list){
+        for(Book b: list){
+            if(b.getAuthor().equals(this.getNome())){
+                bookListAuthor.add(b);
+            }
+        }
     }
 
     public Long getId() {
@@ -37,9 +45,8 @@ public class Author implements Serializable {
     public String getNome() {
         return nome;
     }
-
     public List<Book> getBookList() {
-        return bookList;
+        return bookListAuthor;
     }
 
     @Override

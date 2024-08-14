@@ -1,5 +1,6 @@
 package com.project.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Book implements Serializable {
 
     private String titulo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "author_ID")
     private Author author;

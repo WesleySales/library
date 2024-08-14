@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class LB_Rest implements Serializable {
+public class LB_Rent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,25 +21,35 @@ public class LB_Rest implements Serializable {
     @JoinColumn(name = "book_ID")
     private Book book_Rest;
 
-//    private LocalDate dataEmprestimo;
-//    private LocalDate dataDevolucao;
+    private LocalDate dateRent = LocalDate.now();
+    private LocalDate dateReturn = dateRent.plusDays(7);
 
 
-    public LB_Rest(){}
+    public LB_Rent(){}
 
-    public LB_Rest(Long id, LB_User user,Book book_Rest) {
+    public LB_Rent(Long id, LB_User user,Book book_Rent) {
         this.id = id;
         this.user = user;
-        this.book_Rest = book_Rest;
+        this.book_Rest = book_Rent;
+        this.dateRent = dateRent;
+        this.dateRent = dateReturn;
     }
 
     public Long getId() {
         return id;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
+    public LB_User getUser() {
+        return user;
+    }
+
+    public LocalDate getDateRent() {
+        return dateRent;
+    }
+
+    public LocalDate getDateReturn() {
+        return dateReturn;
+    }
 
     public Book getBook_Rest() {
         return book_Rest;
@@ -50,8 +59,8 @@ public class LB_Rest implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LB_Rest lbRest = (LB_Rest) o;
-        return Objects.equals(id, lbRest.id);
+        LB_Rent lbRent = (LB_Rent) o;
+        return Objects.equals(id, lbRent.id);
     }
 
     @Override
