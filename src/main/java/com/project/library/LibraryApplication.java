@@ -43,6 +43,7 @@ public class LibraryApplication implements CommandLineRunner {
 		Author aut1 = new Author(null, "Machado de Assis");
 		Author aut2 = new Author(null, "Guimaraes Rosa");
 		Author aut3 = new Author(null, "Carolina Maria");
+		Author aut4 = new Author(null, "Rick Riordan");
 		authorRepository.save(aut1);
 		authorRepository.save(aut2);
 		authorRepository.save(aut3);
@@ -50,8 +51,7 @@ public class LibraryApplication implements CommandLineRunner {
 		Category cat1 = new Category(null, "Romance");
 		Category cat2 = new Category(null, "Biografia");
 		Category cat3 = new Category(null, "Ficção");
-		Category cat4 = new Category(null, "Ficção");
-		Category cat5 = new Category(null, "Ficção");
+		Category cat4 = new Category(null, "Drama");
 		categoryRepository.save(cat1);
 		categoryRepository.save(cat2);
 		categoryRepository.save(cat3);
@@ -65,10 +65,11 @@ public class LibraryApplication implements CommandLineRunner {
 		Book book7 = new Book(null, "Primeiras Estórias", aut2, cat3);
 		Book book8 = new Book(null, "A Terceira Margem do Rio", aut2, cat1);
 		Book book9 = new Book(null, "Corpo de Baile", aut2, cat1);
+
 		List<Book> bookList = new ArrayList<>();
+
 		bookList.addAll(Arrays.asList(book1,book2,book3,book4,book5, book5,
 				book6,book7,book8, book9));
-
 
 		aut1.addBookToAuthor(bookList);
 		aut2.addBookToAuthor(bookList);
