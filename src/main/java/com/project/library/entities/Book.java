@@ -1,6 +1,7 @@
 package com.project.library.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.library.dtos.BookDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String title;
 
     @JsonIgnore
     @ManyToOne
@@ -24,18 +25,26 @@ public class Book implements Serializable {
     private Author author;
 
     @ManyToOne
-    @JoinColumn(name = "category_ID")
+    @JoinColumn(name = "category_ID") //Se a categoria for deletada o livro pertencente a ela tambem sera
     private Category category;
 
 //    @OneToMany(mappedBy = "book_Rest")
 //    private List<LB_Rest> lb_rest = new ArrayList<>();
 
     public Book(){}
+    public Book(BookDTO bookDTO){
+        this.id= bookDTO.id();
+        this.title= bookDTO.title();
+    }
     public Book(Long id, String titulo, Author author, Category category) {
         this.id = id;
-        this.titulo = titulo;
+        this.title = titulo;
         this.author = author;
         this.category = category;
+    }
+
+    public void setTitulo(String titulo) {
+        this.title = titulo;
     }
 
     public Long getId() {
@@ -43,7 +52,7 @@ public class Book implements Serializable {
     }
 
     public String getTitulo() {
-        return titulo;
+        return title;
     }
 
     public Author getAuthor() {
@@ -54,7 +63,9 @@ public class Book implements Serializable {
         return category;
     }
 
-
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.project.library.entities;
 
+import com.project.library.dtos.LB_RentDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,25 +15,32 @@ public class LB_Rent implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_ID")
+    @JoinColumn(name = "user_ID", nullable = false)
     private LB_User user;
 
     @ManyToOne
     @JoinColumn(name = "book_ID")
     private Book book_Rest;
 
-    private LocalDate dateRent = LocalDate.now();
+    private LocalDate dateRent = LocalDate.now() ;
     private LocalDate dateReturn = dateRent.plusDays(7);
 
 
     public LB_Rent(){}
+//    public LB_Rent(LB_RentDTO){
+//        this.id = id;
+//        this.user = user;
+//        this.book_Rest = book_Rent;
+//        this.dateRent = getDateRent();
+//        this.dateReturn = getDateReturn();
+//    }
 
     public LB_Rent(Long id, LB_User user,Book book_Rent) {
         this.id = id;
         this.user = user;
         this.book_Rest = book_Rent;
-        this.dateRent = dateRent;
-        this.dateRent = dateReturn;
+        this.dateRent = getDateRent();
+        this.dateReturn = getDateReturn();
     }
 
     public Long getId() {

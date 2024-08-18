@@ -1,6 +1,7 @@
 package com.project.library.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.library.dtos.CategoryDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +20,7 @@ public class Category implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Book> bookList = new ArrayList<>();
 
     public Category(){}
@@ -27,6 +28,11 @@ public class Category implements Serializable {
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Category(CategoryDTO categoryDTO){
+        this.id = categoryDTO.id();
+        this.name = categoryDTO.name();
     }
 
     public Long getId() {

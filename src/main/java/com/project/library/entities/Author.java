@@ -1,6 +1,7 @@
 package com.project.library.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.library.dtos.AuthorDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -24,6 +25,11 @@ public class Author implements Serializable {
 
     public Author(){}
 
+    public Author(AuthorDTO authorDTO){
+        this.id = authorDTO.id();
+        this.nome = authorDTO.name();
+    }
+
     public Author(Long id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -36,6 +42,10 @@ public class Author implements Serializable {
                 bookListAuthor.add(b);
             }
         }
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getId() {
@@ -60,5 +70,14 @@ public class Author implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", bookListAuthor=" + bookListAuthor +
+                '}';
     }
 }
