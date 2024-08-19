@@ -1,5 +1,6 @@
 package com.project.library.entities;
 
+import com.project.library.dtos.LB_UserDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,12 +26,22 @@ public class LB_User implements Serializable {
 
     public LB_User(){}
 
+    public LB_User(LB_UserDTO data) {
+        this.id = data.id();
+        this.name = data.name();
+        this.CPF = data.CPF();
+        this.phone = data.phone();
+    }
+    
     public LB_User(Long id, String name, Long CPF, Long phone) {
         this.id = id;
         this.name = name;
         this.CPF = CPF;
         this.phone = phone;
-//        this.lb_rest = lb_rest;
+        }
+
+    public String getName() {
+        return name;
     }
 
     public Long getId() {

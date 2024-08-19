@@ -1,11 +1,11 @@
 package com.project.library.entities;
 
-import com.project.library.dtos.LB_RentDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class LB_Rent implements Serializable {
@@ -20,27 +20,20 @@ public class LB_Rent implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "book_ID")
-    private Book book_Rest;
+    private Book book_Rent;
 
-    private LocalDate dateRent = LocalDate.now() ;
-    private LocalDate dateReturn = dateRent.plusDays(7);
-
+    private LocalDate dateRent;
+    private LocalDate dateReturn ;
 
     public LB_Rent(){}
-//    public LB_Rent(LB_RentDTO){
-//        this.id = id;
-//        this.user = user;
-//        this.book_Rest = book_Rent;
-//        this.dateRent = getDateRent();
-//        this.dateReturn = getDateReturn();
-//    }
 
-    public LB_Rent(Long id, LB_User user,Book book_Rent) {
-        this.id = id;
+
+    public LB_Rent(LB_User user,Book book_Rent) {
         this.user = user;
-        this.book_Rest = book_Rent;
-        this.dateRent = getDateRent();
-        this.dateReturn = getDateReturn();
+        this.book_Rent = book_Rent;
+        this.dateRent = LocalDate.now();
+        this.dateReturn = LocalDate.now().plusDays(7);
+        book_Rent.setAvaliable(false);
     }
 
     public Long getId() {
@@ -59,8 +52,8 @@ public class LB_Rent implements Serializable {
         return dateReturn;
     }
 
-    public Book getBook_Rest() {
-        return book_Rest;
+    public Book getBook_Rent() {
+        return book_Rent;
     }
 
     @Override

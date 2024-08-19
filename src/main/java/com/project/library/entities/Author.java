@@ -20,19 +20,15 @@ public class Author implements Serializable {
     private String nome;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Book> bookListAuthor;
 
     public Author(){}
 
-    public Author(AuthorDTO authorDTO){
-        this.id = authorDTO.id();
-        this.nome = authorDTO.name();
-    }
 
-    public Author(Long id, String nome) {
+    public Author(String name) {
         this.id = id;
-        this.nome = nome;
+        this.nome = name;
         this.bookListAuthor = new ArrayList<>();
     }
 

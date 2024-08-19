@@ -24,23 +24,31 @@ public class Book implements Serializable {
     @JoinColumn(name = "author_ID")
     private Author author;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "category_ID") //Se a categoria for deletada o livro pertencente a ela tambem sera
     private Category category;
 
-//    @OneToMany(mappedBy = "book_Rest")
-//    private List<LB_Rest> lb_rest = new ArrayList<>();
 
+    private boolean avaliable;
     public Book(){}
     public Book(BookDTO bookDTO){
-        this.id= bookDTO.id();
         this.title= bookDTO.title();
+        this.avaliable = true;
     }
-    public Book(Long id, String titulo, Author author, Category category) {
+    public Book(String titulo, Author author, Category category) {
         this.id = id;
         this.title = titulo;
         this.author = author;
         this.category = category;
+        this.avaliable = true;
+    }
+
+    public boolean isAvaliable() {
+        return avaliable;
+    }
+
+    public void setAvaliable(boolean avaliable) {
+        this.avaliable = avaliable;
     }
 
     public void setTitulo(String titulo) {
@@ -50,17 +58,17 @@ public class Book implements Serializable {
     public Long getId() {
         return id;
     }
-
-    public String getTitulo() {
-        return title;
-    }
-
     public Author getAuthor() {
         return author;
     }
 
     public Category getCategory() {
         return category;
+    }
+
+
+    public String getTitle() {
+        return title;
     }
 
     public void setCategory(Category category) {
