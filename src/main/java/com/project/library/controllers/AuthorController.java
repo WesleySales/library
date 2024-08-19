@@ -3,6 +3,7 @@ package com.project.library.controllers;
 import com.project.library.dtos.AuthorDTO;
 import com.project.library.entities.Author;
 import com.project.library.repositories.AuthorRepository;
+import com.project.library.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,12 @@ public class AuthorController {
 
     @Autowired
     AuthorRepository authorRepository;
+    @Autowired
+    AuthorService authorService;
 
     @PostMapping
     public ResponseEntity createAuthor(@RequestBody AuthorDTO authorDTO){
-        Author newAuthor = new Author(authorDTO);
-        authorRepository.save(newAuthor);
+        Author newAuthor=authorService.createAuthor(authorDTO);
         return ResponseEntity.ok().body(newAuthor);
     }
 
@@ -39,14 +41,14 @@ public class AuthorController {
 
 
     @GetMapping
-    public ResponseEntity<List<Author>> findAll(){
-        List<Author> list = authorRepository.findAll();
+    public ResponseEntity findAll(){
+        List<Author> list = authorService.getAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Author> findById(Long id){
-        Author author = authorRepository.findById(id).get();
+    public ResponseEntity findById(Long id){
+        Author author = authorService.getById(id);
         return ResponseEntity.ok().body(author);
     }
 }
