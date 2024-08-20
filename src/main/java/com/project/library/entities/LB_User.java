@@ -27,7 +27,6 @@ public class LB_User implements Serializable {
     public LB_User(){}
 
     public LB_User(LB_UserDTO data) {
-        this.id = data.id();
         this.name = data.name();
         this.CPF = data.CPF();
         this.phone = data.phone();

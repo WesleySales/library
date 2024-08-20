@@ -24,20 +24,15 @@ public class Author implements Serializable {
     private List<Book> bookListAuthor;
 
     public Author(){}
+    public Author(AuthorDTO authorDTO){
+        this.nome = authorDTO.nameAuthor();
+    }
 
 
     public Author(String name) {
         this.id = id;
         this.nome = name;
         this.bookListAuthor = new ArrayList<>();
-    }
-
-    public void addBookToAuthor(List<Book> list){
-        for(Book b: list){
-            if(b.getAuthor().equals(this.getNome())){
-                bookListAuthor.add(b);
-            }
-        }
     }
 
     public void setNome(String nome) {
@@ -47,13 +42,12 @@ public class Author implements Serializable {
     public Long getId() {
         return id;
     }
-
     public String getNome() {
         return nome;
     }
-    public List<Book> getBookList() {
-        return bookListAuthor;
-    }
+//    public List<Book> getBookList() {
+//        return bookListAuthor;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -62,7 +56,6 @@ public class Author implements Serializable {
         Author author = (Author) o;
         return Objects.equals(id, author.id);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id);

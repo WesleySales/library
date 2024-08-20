@@ -32,7 +32,7 @@ public class CategoryController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO){
         Category newCategory = categoryRepository.findById(id).get();
-        newCategory.setName(categoryDTO.name());
+        newCategory.setName(categoryDTO.nameCategory());
         categoryRepository.save(newCategory);
         return ResponseEntity.ok().body(newCategory);
     }

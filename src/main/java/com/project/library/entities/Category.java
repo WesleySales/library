@@ -31,7 +31,7 @@ public class Category implements Serializable {
     }
 
     public Category(CategoryDTO categoryDTO){
-        this.name = categoryDTO.name();
+        this.name = categoryDTO.nameCategory();
     }
 
     public Long getId() {

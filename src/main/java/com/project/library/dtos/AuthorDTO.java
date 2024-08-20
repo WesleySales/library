@@ -1,4 +1,4 @@
 package com.project.library.dtos;
 
-public record AuthorDTO(String name) {
+public record AuthorDTO(String nameAuthor) {
 }

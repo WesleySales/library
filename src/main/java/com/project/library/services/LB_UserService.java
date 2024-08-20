@@ -7,6 +7,8 @@ import com.project.library.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LB_UserService {
 
@@ -17,11 +19,26 @@ public class LB_UserService {
         repository.save(newUser);
         return newUser;
     }
+
+    public LB_User editUser(Long id,LB_UserDTO data){
+        LB_User updateUser = getById(id);
+        updateUser = new LB_User(data);
+        repository.save(updateUser);
+        return updateUser;
+    }
+    public void delete(Long id){
+        LB_User deleteUser = getById(id);
+        repository.delete(deleteUser);
+    }
     public LB_User getById(Long id){
         LB_User getUser = repository.findById(id).get();
-        repository.save(getUser);
         return getUser;
     }
+    public List<LB_User> getAll(){
+        List<LB_User> list = repository.findAll();
+        return list;
+    }
+
 
 
 

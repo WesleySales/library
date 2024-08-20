@@ -28,7 +28,7 @@ public class AuthorController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable  Long id, @RequestBody AuthorDTO authorDTO){
         Author newAuthor = authorRepository.findById(id).get();
-        newAuthor.setNome(authorDTO.name());
+        newAuthor.setNome(authorDTO.nameAuthor());
         authorRepository.save(newAuthor);
         return ResponseEntity.ok().body(newAuthor);
     }
@@ -49,6 +49,11 @@ public class AuthorController {
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(Long id){
         Author author = authorService.getById(id);
+        return ResponseEntity.ok().body(author);
+    }
+    @GetMapping(value = "/{name}")
+    public ResponseEntity findByName(String name){
+        Author author = authorService.getByName(name);
         return ResponseEntity.ok().body(author);
     }
 }

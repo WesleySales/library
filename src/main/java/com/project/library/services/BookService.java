@@ -23,20 +23,17 @@ public class BookService {
 
 
     public Book createBook(BookDTO dataBook, AuthorDTO dataAuthor, CategoryDTO dataCategory){
-        Author author;
-        if(authorService.getByName(dataAuthor.name()) != null){
-            author = authorService.getByName(dataAuthor.name());
-        } else {
+
+        Author author = authorService.getByName(dataAuthor.nameAuthor());
+        if(author == null){
             author = authorService.createAuthor(dataAuthor);
         }
 
-        Category category;
-        if(categoryService.getByName(dataCategory.name()) != null){
-            category = categoryService.getByName(dataCategory.name());
-        } else {
-            categoryService.createCategory(dataCategory);
-            category = new Category(dataCategory);
+        Category category=categoryService.getByName(dataCategory.nameCategory());
+        if(category==null){
+           category = categoryService.createCategory(dataCategory);
         }
+
         Book newBook = new Book(dataBook.title(),author,category);
         bookRepository.save(newBook);
         return newBook;

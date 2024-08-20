@@ -1,7 +1,9 @@
 package com.project.library.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.library.dtos.AuthorDTO;
 import com.project.library.dtos.BookDTO;
+import com.project.library.dtos.CategoryDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,8 +21,8 @@ public class Book implements Serializable {
 
     private String title;
 
-    @JsonIgnore
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_ID")
     private Author author;
 
@@ -31,7 +33,7 @@ public class Book implements Serializable {
 
     private boolean avaliable;
     public Book(){}
-    public Book(BookDTO bookDTO){
+    public Book(BookDTO bookDTO, AuthorDTO authorDTO, CategoryDTO categoryDTO){
         this.title= bookDTO.title();
         this.avaliable = true;
     }
@@ -42,11 +44,9 @@ public class Book implements Serializable {
         this.category = category;
         this.avaliable = true;
     }
-
     public boolean isAvaliable() {
         return avaliable;
     }
-
     public void setAvaliable(boolean avaliable) {
         this.avaliable = avaliable;
     }
@@ -58,19 +58,16 @@ public class Book implements Serializable {
     public Long getId() {
         return id;
     }
+
     public Author getAuthor() {
         return author;
     }
-
     public Category getCategory() {
         return category;
     }
-
-
     public String getTitle() {
         return title;
     }
-
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -86,5 +83,16 @@ public class Book implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                ", category=" + category +
+                ", avaliable=" + avaliable +
+                '}';
     }
 }

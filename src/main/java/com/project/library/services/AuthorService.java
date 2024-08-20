@@ -16,7 +16,7 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     public Author createAuthor(AuthorDTO data){
-        Author newAuthor = new Author(data.name());
+        Author newAuthor = new Author(data.nameAuthor());
         authorRepository.save(newAuthor);
         return newAuthor;
     }
